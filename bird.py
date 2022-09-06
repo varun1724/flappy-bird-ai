@@ -17,10 +17,12 @@ class Bird:
         self.img_count = 0
         self.img = self.IMGS[0]
 
+
     def jump(self):
         self.vel = -10.5
         self.tick_count = 0
         self.height = self.y
+
 
     def move(self):
         self.tick_count += 1
@@ -47,6 +49,7 @@ class Bird:
                 # make it slowly tilt down to 90 degrees
                 self.tilt -= self.ROT_VEL    
 
+
     def draw(self, win):
         self.img_count += 1
 
@@ -70,6 +73,7 @@ class Bird:
         rotated_image = pygame.transform.rotate(self.img, self.tilt)
         new_rect = rotated_image.get_rect(center=self.img.get_rect(topleft=(self.x, self.y)).center)
         win.blit(rotated_image, new_rect.topleft)
+
 
     def get_mask(self):
         return pygame.mask.from_surface(self.img)
