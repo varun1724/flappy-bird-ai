@@ -1,40 +1,21 @@
 import pygame
-import neat
-import time
-import bird
 import constant
 
 
-def draw_window(win, bird):
+def draw_window(win, bird, pipes, base, score):
     # .blit() means draw
     win.blit(constant.BG_IMG, (0,0))
+
+    for pipe1 in pipes:
+        pipe1.draw(win)
+
+    base.draw(win)
     bird.draw(win)
+
+    text = constant.STAT_FONT.render("Score: " + str(score), 1, (255, 255, 255))
+    win.blit(text, (constant.WIN_WIDTH - 10 - text.get_width(), 10))
+
     pygame.display.update()
-
-
-def main():
-    bird1 = bird.Bird(200, 200)
-    win = pygame.display.set_mode((constant.WIN_WIDTH, constant.WIN_HEIGHT))
-    clock = pygame.time.Clock()
-    
-    run = True
-    while run:
-
-        # sets it to 30 ticks every second (slows the while loop)
-        clock.tick(30)
-
-        # tracks whenever something happens in the window. Ex. User clicks the mouse
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-
-        # bird1.move()
-        draw_window(win, bird1)
-    
-    pygame.quit()
-    quit()
-
-main()
 
 
 
