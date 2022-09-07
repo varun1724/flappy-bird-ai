@@ -6,8 +6,14 @@ import constant
 import flappy_bird
 
 
+best = 0
+reset_val = True
+
 
 def main():
+    global best
+    global reset_val
+
     bird1 = bird.Bird(230, 350)
     base1 = base.Base(730)
     pipes = [pipe.Pipe(625)]
@@ -26,15 +32,22 @@ def main():
 
         # tracks whenever something happens in the window. Ex. User clicks the mouse
         for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    bird1.jump()
             if event.type == pygame.QUIT:
                 run = False
+                reset_val = False
 
-        # bird1.move()
+        bird1.move()
         add_pipe = False
         rem = []
         for pipe1 in pipes:
             if pipe1.collide(bird1):
-                pass
+                if score > best:
+                    best = score
+                reset_val = True
+                run = False
 
             if pipe1.x + pipe1.PIPE_TOP.get_width() < 0:
                 rem.append(pipe1)
@@ -52,13 +65,22 @@ def main():
         for r in rem:
             pipes.remove(r)
 
-        if bird1.y + bird1.img.get_height() > 730 or bird.y < -30:
-            pass
+        if bird1.y + bird1.img.get_height() > 730 or bird1.y < -30:
+            if score > best:
+                best = score
+            reset_val = True
+            run = False
 
         base1.move()
-        flappy_bird.draw_window(win, bird1, pipes, base1, score)
+        flappy_bird.draw_window(win, [bird1], pipes, base1, score, best=best)
     
-    pygame.quit()
-    quit()
+    if reset_val == False:
+        pygame.quit()
+        quit()
+    else:
+        main()
+
+
 
 main()
+

@@ -2,7 +2,7 @@ import pygame
 import constant
 
 
-def draw_window(win, birds, pipes, base, score, gen=-1):
+def draw_window(win, birds, pipes, base, score, gen=-1, best=0):
     # .blit() means draw
     win.blit(constant.BG_IMG, (0,0))
 
@@ -10,7 +10,10 @@ def draw_window(win, birds, pipes, base, score, gen=-1):
     win.blit(text, (constant.WIN_WIDTH - 10 - text.get_width(), 10))
 
     if gen > -1:
-        text = constant.STAT_FONT.render("Gen: " + str(gen), 1, (255, 255, 255))
+        text = constant.STAT_FONT.render("Gen: "  + str(gen), 1, (255, 255, 255))
+        win.blit(text, (10, 10))
+    else:
+        text = constant.STAT_FONT.render("Best: " + str(best), 1, (255, 255, 255))
         win.blit(text, (10, 10))
 
     for pipe1 in pipes:

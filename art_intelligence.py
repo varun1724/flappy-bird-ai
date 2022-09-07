@@ -1,4 +1,3 @@
-from inspect import GEN_CLOSED
 import bird
 import base
 import pipe
@@ -106,7 +105,7 @@ def eval_genomes(genomes, config):
             break
 
         base1.move()
-        flappy_bird.draw_window(win, birds, pipes, base1, score, gen)
+        flappy_bird.draw_window(win, birds, pipes, base1, score, gen=gen)
 
 
 
