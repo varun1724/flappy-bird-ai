@@ -8,7 +8,7 @@ import flappy_bird
 
 
 def main():
-    bird1 = bird.Bird(230, 250)
+    bird1 = bird.Bird(230, 350)
     base1 = base.Base(730)
     pipes = [pipe.Pipe(625)]
     
@@ -52,7 +52,7 @@ def main():
         for r in rem:
             pipes.remove(r)
 
-        if bird1.y + bird1.img.get_height() > 730:
+        if bird1.y + bird1.img.get_height() > 730 or bird.y < -30:
             pass
 
         base1.move()
@@ -60,3 +60,5 @@ def main():
     
     pygame.quit()
     quit()
+
+main()
